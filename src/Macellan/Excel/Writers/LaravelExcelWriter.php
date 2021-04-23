@@ -9,6 +9,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Response;
 use Macellan\Excel\Classes\LaravelExcelWorksheet;
 use Macellan\Excel\Exceptions\LaravelExcelException;
+use Illuminate\Support\Str;
 
 /**
  *
@@ -679,7 +680,7 @@ class LaravelExcelWriter {
     public function __call($method, $params)
     {
         // If the dynamic call starts with "set"
-        if (starts_with($method, 'set') && $this->excel->isChangeableProperty($method))
+        if (Str::startsWith($method, 'set') && $this->excel->isChangeableProperty($method))
         {
             $this->_setAttribute($method, $params);
 
